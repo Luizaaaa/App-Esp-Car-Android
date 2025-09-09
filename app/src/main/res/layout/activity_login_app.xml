@@ -56,7 +56,7 @@
                 android:id="@+id/tilTel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Digite o telefone"
+                android:hint="@string/digite_o_telefone"
                 app:endIconMode="clear_text">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -76,7 +76,7 @@
                 android:id="@+id/tilCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Codigo"
+                android:hint="@string/codigo"
                 android:visibility="gone"
                 android:inputType="number">
 
@@ -84,6 +84,7 @@
                     android:id="@+id/etCode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="number"
                     android:imeOptions="actionDone" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -93,7 +94,8 @@
                 android:layout_height="48dp"
                 android:layout_marginTop="16dp"
                 android:backgroundTint="#1E88E5"
-                android:text="Enviar SMS"
+                android:visibility="visible"
+                android:text="@string/enviar_sms"
                 android:textAllCaps="false"
                 android:textColor="#ffffff" />
 

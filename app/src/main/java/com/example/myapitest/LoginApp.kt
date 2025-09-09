@@ -30,7 +30,6 @@ class LoginApp : AppCompatActivity() {
     private lateinit var binding: ActivityLoginAppBinding
     private lateinit var auth: FirebaseAuth
     private lateinit var credentialManager: CredentialManager
-    private lateinit var signInLauncher: ActivityResultLauncher<Intent>
     private lateinit var verification:String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,13 +53,13 @@ class LoginApp : AppCompatActivity() {
             onVerifyCode()
         }
         binding.btnGoogle.setOnClickListener {
-            credentialManager = CredentialManager.create(this)
+
             onLoginGoogle()
         }
     }
     private fun onLoginGoogle() {
+        credentialManager = CredentialManager.create(this)
         auth = FirebaseAuth.getInstance()
-
         val googleIdOption = GetGoogleIdOption.Builder()
             .setFilterByAuthorizedAccounts(false)
             .setServerClientId(getString(R.string.default_web_client_id))
@@ -79,34 +78,30 @@ class LoginApp : AppCompatActivity() {
                 )
                 handleSignIn(result)
             } catch (e: Exception) {
-                Log.e("LoginGoogle", "Erro ao obter credencial", e)
+                Toast.makeText(this@LoginApp, "Erro ao obter credencial +${e.message}", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    private suspend fun handleSignIn(result: GetCredentialResponse) {
+    private fun handleSignIn(result: GetCredentialResponse) {
         val credential = result.credential
 
         if (credential is CustomCredential && credential.type == GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL) {
-            try {
+
                 val googleCredential = GoogleIdTokenCredential.createFrom(credential.data)
+
                 val tokenString = googleCredential.idToken
 
                 val firebaseCredential = GoogleAuthProvider.getCredential(tokenString, null)
                 FirebaseAuth.getInstance().signInWithCredential(firebaseCredential)
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            startMainAct()
-                            Log.d("LoginGoogle", "Usuário logado: ${FirebaseAuth.getInstance().currentUser?.email}")
-                        } else {
-                            Log.e("LoginGoogle", "Erro ao logar", task.exception)
-                        }
+                    .addOnSuccessListener {
+                        startMainAct()
                     }
-            } catch (e: GoogleIdTokenParsingException) {
-                Log.e("LoginGoogle", "Token inválido", e)
-            }
+                    .addOnFailureListener {
+                        Toast.makeText(this@LoginApp, "Erro ao fazer login com Google", Toast.LENGTH_SHORT).show()
+                    }
         } else {
-            Log.e("LoginGoogle", "Tipo de credential inesperado")
+            Toast.makeText(this, "Tipo de credential inválido", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -146,6 +141,7 @@ class LoginApp : AppCompatActivity() {
                     Toast.makeText(this@LoginApp, "Codigo enviado por SMS", Toast.LENGTH_SHORT).show()
                     binding.btnVerificar.visibility = View.VISIBLE
                     binding.tilCode.visibility = View.VISIBLE
+                    binding.btnEnviarSMS.visibility = View.GONE
                 }
 
             }).build()
