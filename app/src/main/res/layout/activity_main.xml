@@ -28,8 +28,22 @@
                 android:layout_height="60dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/logoutCta"
+                android:background="@color/purple_200"
+                android:src="@android:drawable/ic_menu_add"
+                android:contentDescription="Adicionar carro" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/logoutCta"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/addCta"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:src="@android:drawable/ic_menu_add" />
+                android:background="@color/camera"
+                android:src="@android:drawable/ic_lock_power_off"
+                android:contentDescription="Logout" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

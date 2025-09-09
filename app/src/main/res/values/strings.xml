@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">MyApiTest - COLOQUE O SEU NOME AQUI</string>
+    <string name="app_name">MyApiTest - Luiza S. L.</string>
+    <string name="erro_desc">Erro desconhecido</string>
+    <string name="place_car">🚗 Localização do Carro</string>
+    <string name="error_loc_permission">Permissão de localização negada!</string>
+    <string name="salvar_carro">Salvar Carro</string>
+    <string name="error_form">O campo %1$s não pode ser vazio</string>
+    <string name="error_form_loc">Selecione a localização do carro!</string>
+    <string name="google">Google</string>
+    <string name="ou">ou</string>
+    <string name="verificar">Verificar</string>
+    <string name="default_web_client_id">44563611381-p1pj0v4hs2kbn3beoagh8per0ce4g0ii.apps.googleusercontent.com</string>
 </resources>
