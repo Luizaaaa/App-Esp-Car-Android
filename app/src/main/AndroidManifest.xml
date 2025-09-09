@@ -35,12 +35,6 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-
-
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDKTS7PyaN7HWRGGpWS2dAFaVXzWG9w-jE" />
-
         <provider
             android:name="com.google.android.gms.ads.MobileAdsInitProvider"
             android:authorities="${applicationId}.com.google.android.gms.ads.MobileAdsInitProvider"
